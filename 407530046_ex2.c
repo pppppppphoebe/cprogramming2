@@ -11,7 +11,6 @@
                 else article[i]=' ';\
             }
 #define CHECK_FOUND(word,found,str1,str2,len)\
-            found = stristr(word,str1);\
             if(found != 0){\
                 printf("\n");\
                 print_word(word,found,str2,len);\
@@ -65,6 +64,7 @@ int main(){
                 #if DEBUG
                     printf("the word is: %s", word);
                 #endif
+                found = strstr(word,str1);
                 CHECK_FOUND(word,found,str1,str2,len);
                 word = strtok(NULL, " ");
             }
@@ -88,6 +88,7 @@ int main(){
                 #if DEBUG
                     printf("the word is: %s", word);
                 #endif
+                found = stristr(word,str1);
                 CHECK_FOUND(word,found,str1,str2,len);
                 word = strtok(NULL, " ");
             }
@@ -121,7 +122,6 @@ void print_word( char* start, char* found, char* str2, int len )
 			p++;
 		}
     }
-    //printf("\n");
 }
 
 //Similar to strstr() but for case insensitive
