@@ -7,8 +7,7 @@
 //replace the symbols(not number, letter and dash) to space
 #define SYMBOL_TO_SPACE(article) \
             for(int i=0;i<strlen(article);i++){\
-                if(isalnum(article[i]) || article[i]=='-'){}\
-                else article[i]=' ';\
+                if(!isalnum(article[i]) && article[i]!='-') article[i]=' ';\
             }
 #define CHECK_FOUND(word,found,str1,str2,len)\
             if(found != 0){\
@@ -82,7 +81,7 @@ int main(){
             SYMBOL_TO_SPACE(article);
             word = strtok(article, " ");
             /* walk through other words */
-            while( word != NULL ) 
+            while( word != NULL) 
             {
                 printf("\n");
                 #if DEBUG
