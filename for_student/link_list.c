@@ -1,11 +1,5 @@
 #include "myDS.h"
 #include "basic.h"
-/*
-struct node{
-    char name[15];
-	int id;
-    struct node *next;
-};*/
 
 // HEAD is point to FOODPAPA (id: 0)
 void my_insert(struct node* HEAD, int ID, char *Name, int node_id){
@@ -53,7 +47,10 @@ void my_swap(struct node *HEAD, char *Name1, char *Name2){
 	// If either of the node doesn’t exit, print “INVALID OPERATION”
 	// NOTICE: don't just swap the node's value
 	// You need to break the link and recombine it
-	struct node *p1,*prev_p1,*p2,*prev_p2,*temp;
+
+	struct node *p1, *prev_p1, *p2, *prev_p2, *temp;
+
+	//find first node(p1) that the name equals to Name1 or Name2.
 	for(p1 = HEAD, prev_p1 = NULL ;
 		p1 != NULL && strcmp(p1->name,Name1) != 0 && strcmp(p1->name,Name2) != 0;
 		prev_p1 = p1, p1 = p1->next);
@@ -63,6 +60,7 @@ void my_swap(struct node *HEAD, char *Name1, char *Name2){
 		return;
 	}
 
+	//find second node(p2) that the name equal to Name1 or Name2 but not equal to p1's name.
 	for(p2 = p1->next, prev_p2 = p1 ;
 		p2 != NULL && (strcmp(p2->name,p1->name) == 0 || (strcmp(p2->name,Name1) != 0 && strcmp(p2->name,Name2) != 0));
 		prev_p2 = p2, p2 = p2->next);
@@ -72,21 +70,26 @@ void my_swap(struct node *HEAD, char *Name1, char *Name2){
 		return;
 	}
 
+	//p1, p2 are in first and second place in the linklist.
 	if(prev_p1 == NULL && prev_p2 == p1){
 		p1->next = p2->next;
 		p2->next = p1;
 	}
+	//p1 is in first place and p2 is not next to p1
 	else if(prev_p1 == NULL && prev_p2 != p1){
 		temp = p1->next;
 		p1->next = p2->next;
 		prev_p2->next = p1;
 		p2->next = temp;
 	}
+	//p1 is not in first place and p2 is next to p1
 	else if(prev_p2 == p1){
 		p1->next = p2->next;
 		prev_p1->next = p2;
 		p2->next = p1;
-	}else{
+	}
+	//p1 is not in first place and p2 is not next to p1
+	else{
 		prev_p2->next = p1;
 		prev_p1->next = p2;
 		temp = p2->next;
