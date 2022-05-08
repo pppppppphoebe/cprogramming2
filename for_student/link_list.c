@@ -70,6 +70,10 @@ void my_swap(struct node *HEAD, char *Name1, char *Name2){
 		return;
 	}
 
+	/**this is the method that including the consequence when the first one could be NULL.
+	 * because the first node won't be changed, so we don't need to solve that problem in this case.
+	 * to see other's program : https://www.geeksforgeeks.org/swap-nodes-in-a-linked-list-without-swapping-data/ **/
+	/*
 	//p1, p2 are in first and second place in the linklist.
 	if(prev_p1 == NULL && prev_p2 == p1){
 		p1->next = p2->next;
@@ -82,12 +86,6 @@ void my_swap(struct node *HEAD, char *Name1, char *Name2){
 		prev_p2->next = p1;
 		p2->next = temp;
 	}
-	//p1 is not in first place and p2 is next to p1
-	else if(prev_p2 == p1){
-		p1->next = p2->next;
-		prev_p1->next = p2;
-		p2->next = p1;
-	}
 	//p1 is not in first place and p2 is not next to p1
 	else{
 		prev_p2->next = p1;
@@ -96,6 +94,13 @@ void my_swap(struct node *HEAD, char *Name1, char *Name2){
 		p2->next = p1->next;
 		p1->next = temp;		
 	}
+	*/
+	prev_p2->next = p1;
+	prev_p1->next = p2;
+	temp = p2->next;
+	p2->next = p1->next;
+	p1->next = temp;
+
 }
 
 void my_print_id(struct node *HEAD, char *Name){
