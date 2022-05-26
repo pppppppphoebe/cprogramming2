@@ -36,9 +36,9 @@ void traverse(struct tNode *curNode){
 	{
 		return;	
 	}
-	traverse(curNode->Lchild);
-	printf("%d ",curNode->data);
-	traverse(curNode->Rchild);
+	traverse(curNode->Lchild);		//go to the left one first
+	printf("%d ",curNode->data);	//the  middle  one  second
+	traverse(curNode->Rchild);		//go to the right one last
 }
 
 int find(struct tNode *curNode, int target){
@@ -47,28 +47,35 @@ int find(struct tNode *curNode, int target){
 	// NULL is seen as 0
 	// if not, return "Not in tree\n"
 	//*************************** Don't forget *************************//
-	if(curNode == NULL)
-	{
+	
+	//there is no node to check, comfirm that the target is not in tree
+	if(curNode == NULL){
 		printf("Not in tree\n");
 		return -1;
 	}
 
-	if(target < curNode->data)
-	{
+	//current node is not the target and continute to find others
+	if(target < curNode->data){
 		return find(curNode->Lchild, target);
 	}
-	else if(target > curNode->data)
-	{
+	else if(target > curNode->data){
 		return find(curNode->Rchild, target);
 	}
 	
+	//current node is the target 
 	int left_data, right_data;
-	if(curNode->Lchild == NULL) left_data = 0;
-	else left_data = (curNode->Lchild)->data;
-	if(curNode->Rchild == NULL) right_data = 0; 
-	else right_data = (curNode->Rchild)->data;
-	return right_data + left_data;
-	
+	if(curNode->Lchild == NULL){
+		left_data = 0;
+	}else{
+		left_data = (curNode->Lchild)->data;
+	}
+	if(curNode->Rchild == NULL){
+		right_data = 0;
+	}else{
+		right_data = (curNode->Rchild)->data;
+	}
+
+	return right_data + left_data;	
 }
 
 void delete_tree(struct tNode* curNode){
